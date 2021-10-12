@@ -41,15 +41,6 @@ function getMatrix() {
   }
 }
 
-function addLog(logs) {
-  var rect = document.createElement("p");
-  var text = document.createTextNode(logs);
-
-  rect.appendChild(text);
-  place.appendChild(rect);
-  place.lastChild.scrollIntoView();
-}
-
 // Clear canvas
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -78,14 +69,4 @@ function prevImg() {
 // Draw image
 function drawImg(image) {
   ctx.drawImage(image, 0, 0);
-}
-
-// Get image dx
-function getX(image) {
-  return (canvas.width - image.naturalWidth) / 2;
-}
-
-// Get image dy
-function getY(image) {
-  return (canvas.height - image.naturalHeight) / 2;
 }

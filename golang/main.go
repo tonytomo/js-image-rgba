@@ -12,7 +12,7 @@ func main() {
 	// You can register another format here
 	image.RegisterFormat("png", "png", png.Decode, png.DecodeConfig)
 
-	file, err := os.Open("assets/squidward.png")
+	file, err := os.Open("assets/spongebob2.png")
 
 	if err != nil {
 		fmt.Println("Error: File could not be opened")
