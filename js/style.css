@@ -1,0 +1,60 @@
+:root {
+  --primary: #999999;
+  --secondary: #036bfc;
+  --secondary2: #4a96ff;
+  --fontColor: #ffffff;
+  --background: #222222;
+  --lightRed: #ff7575;
+  --semiTransparent: rgba(255, 255, 255, 0.2);
+  --Transparent: rgba(0, 0, 0, 0);
+  --hMargin: 10%;
+  --padding: 10px;
+  --fontCode: "Courier New", Courier, monospace;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+}
+
+img {
+  display: none;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.btn {
+  background-color: var(--secondary);
+  color: var(--fontColor);
+  padding: 5px 10px;
+  margin-bottom: var(--padding);
+}
+.btn:hover {
+  background-color: var(--secondary2);
+  cursor: pointer;
+}
+
+.answer {
+  font-weight: bold;
+  color: var(--fontColor);
+  font-family: var(--fontCode);
+  padding: var(--padding);
+  display: flex;
+  justify-content: center;
+  gap: var(--padding);
+}
+
+.answer > p {
+    margin: 0;
+    padding: 0;
+}
