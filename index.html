@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>RGBzer</title>
+        <meta name="description" content="Get RGB values from an image" />
+
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <nav>
+            <div id="message" class="message">
+                Upload an image to get RGB values
+            </div>
+            <div class="flex">
+                <button id="submit-button" class="submit-button">Submit</button>
+                <button id="reset-button" class="reset-button">Reset</button>
+            </div>
+        </nav>
+        <main>
+            <input
+                type="file"
+                name="image-file"
+                id="image-file"
+                accept=".png, .jpg, .jpeg"
+            />
+            <canvas id="image-canvas" width="640" height="400">
+                Canvas is not supported
+            </canvas>
+            <h1>Drop an image here or click to upload</h1>
+        </main>
+
+        <footer>~ t ~</footer>
+
+        <script src="index.js"></script>
+    </body>
+</html>
