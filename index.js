@@ -30,9 +30,8 @@ imageFile.addEventListener("change", function () {
     reader.onload = function (e) {
         const img = new Image();
         img.onload = function () {
-            imageCanvas.width = 640;
+            imageCanvas.width = 400;
             imageCanvas.height = 400;
-            console.log(imageCanvas.width, imageCanvas.height);
             if (
                 img.width > imageCanvas.width ||
                 img.height > imageCanvas.height
@@ -43,12 +42,16 @@ imageFile.addEventListener("change", function () {
                 );
                 imageCanvas.width = img.width * scale;
                 imageCanvas.height = img.height * scale;
+                imageFile.style.width =
+                    (img.width * scale - 20).toString() + "px";
+                imageFile.style.height =
+                    (img.height * scale - 20).toString() + "px";
+            } else {
+                imageCanvas.width = img.width;
+                imageCanvas.height = img.height;
+                imageFile.style.width = (img.width - 20).toString() + "px";
+                imageFile.style.height = (img.height - 20).toString() + "px";
             }
-
-            console.log(imageCanvas.width, imageCanvas.height);
-
-            // imageCanvas.width = img.width;
-            // imageCanvas.height = img.height;
             ctx.drawImage(img, 0, 0, imageCanvas.width, imageCanvas.height);
             message.innerHTML = "Image file loaded!";
         };
@@ -59,6 +62,8 @@ imageFile.addEventListener("change", function () {
 
 // If submitButton is clicked, get image data from canvas and download it as a text file
 submitButton.addEventListener("click", function () {
+    submitButton.innerHTML = `<i class="gg-spinner-alt"></i>`;
+
     const pixelBuffer = new Uint32Array(
         ctx.getImageData(
             0,
@@ -70,6 +75,7 @@ submitButton.addEventListener("click", function () {
 
     if (!pixelBuffer.some((color) => color !== 0)) {
         message.innerHTML = "No image data found!";
+        submitButton.innerHTML = `<i class="gg-software-download"></i>`;
         return;
     }
 
@@ -94,6 +100,7 @@ submitButton.addEventListener("click", function () {
     setTimeout(() => {
         a.click();
         URL.revokeObjectURL(url);
+        submitButton.innerHTML = `<i class="gg-software-download"></i>`;
         message.innerHTML = "Image data downloaded!";
     }, 1000);
 });
@@ -101,9 +108,11 @@ submitButton.addEventListener("click", function () {
 // If resetButton is clicked, clear the canvas and clear the input file
 resetButton.addEventListener("click", function () {
     ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
-    imageCanvas.width = 640;
-    imageCanvas.height = 400;
+    imageCanvas.width = 300;
+    imageCanvas.height = 300;
+    imageFile.style.height = "280px";
+    imageFile.style.width = "280px";
     imageFile.value = "";
     message.innerHTML = "Image file cleared!";
-    label.innerHTML = "Drop an image here or click to upload";
+    label.innerHTML = `<i class="gg-software-upload"></i>`;
 });

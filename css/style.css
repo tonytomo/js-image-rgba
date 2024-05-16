@@ -1,7 +1,7 @@
 body {
     position: relative;
     background-color: #333;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI";
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,13 +16,14 @@ nav {
     position: absolute;
     top: 20px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #222;
-    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     color: #fff;
-    padding: 10px;
-    width: 640px;
+    padding: 0 8px;
+    width: auto;
     z-index: 10;
 }
 
@@ -30,20 +31,24 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: 100%;
 }
 
 button {
     padding: 10px;
     margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    width: 100%;
+    border: 0;
+    border-radius: 50%;
+    background-color: #d494ff;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 button:hover {
+    transition-duration: 200ms;
     background-color: #ccc;
 }
 
@@ -51,9 +56,9 @@ button:hover {
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-left: 10px;
+    font-size: small;
+    margin: 0 10px;
     width: 100%;
-    height: 40px;
     color: #fff;
 }
 
@@ -68,35 +73,63 @@ input {
     position: absolute;
     inset: 0;
     margin: auto;
-    height: 380px;
-    width: 620px;
+    height: 280px;
+    width: 280px;
     border-radius: 5px;
     color: #fff;
     z-index: 5;
+}
+input:hover {
+    transition-duration: 200ms;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 canvas {
     position: absolute;
     inset: 0;
     margin: auto;
-    border: 1px solid #ccc;
+    border: 2px dashed #ccc;
     border-radius: 5px;
 }
 
-h1 {
+.label {
     position: absolute;
     inset: 0;
     margin: auto;
+    top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     z-index: -1;
 }
+.gg-software-upload {
+    --ggs: 5;
+}
 
 footer {
     position: absolute;
-    bottom: 20px;
+    right: 0;
+    bottom: 0;
+    padding: 5px 20px;
     color: #fff;
+    background-color: #222;
+    border-radius: 10px 0 0 0;
     margin-top: 20px;
+}
+
+footer > a {
+    color: #d494ff;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    nav {
+        flex-direction: column-reverse;
+        padding: 8px;
+    }
+    .message {
+        justify-content: center;
+    }
 }

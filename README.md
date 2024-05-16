@@ -4,9 +4,9 @@ This is a JavaScript application that allows you to extract RGB data from an ima
 
 ## Features
 
-- Load an image file
-- Convert the image to RGBA format
-- Extract RGB data from each pixel of the image
+-   Load an image file
+-   Convert the image to RGBA format
+-   Extract RGB data from each pixel of the image
 
 ## Installation
 
@@ -23,3 +23,7 @@ This is a JavaScript application that allows you to extract RGB data from an ima
 ## Contributing
 
 Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
+
+## Credits
+
+This project uses css.gg icons library. Find more information [here](https://css.gg/).
