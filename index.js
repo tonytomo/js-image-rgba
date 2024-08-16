@@ -1,18 +1,10 @@
 const imageFile = document.getElementById("image-file");
-
 const message = document.getElementById("message");
-
 const submitButton = document.getElementById("submit-button");
-
 const resetButton = document.getElementById("reset-button");
-
 const label = document.getElementById("label");
-
-const imageCanvas = document.getElementById("image-canvas");
-
-const ctx = imageCanvas.getContext("2d");
-
-// Add function to get absolute number
+const canvas = document.getElementById("image-canvas");
+const ctx = canvas.getContext("2d");
 
 // If user select an image to imageFile element, create a new Image object
 imageFile.addEventListener("change", function () {
@@ -28,34 +20,31 @@ imageFile.addEventListener("change", function () {
     }
 
     reader.onload = function (e) {
-        const img = new Image();
-        img.onload = function () {
-            imageCanvas.width = 400;
-            imageCanvas.height = 400;
-            if (
-                img.width > imageCanvas.width ||
-                img.height > imageCanvas.height
-            ) {
+        const image = new Image();
+        image.onload = function () {
+            canvas.width = 400;
+            canvas.height = 400;
+            if (image.width > canvas.width || image.height > canvas.height) {
                 const scale = Math.min(
-                    imageCanvas.width / img.width,
-                    imageCanvas.height / img.height
+                    canvas.width / image.width,
+                    canvas.height / image.height
                 );
-                imageCanvas.width = img.width * scale;
-                imageCanvas.height = img.height * scale;
+                canvas.width = image.width * scale;
+                canvas.height = image.height * scale;
                 imageFile.style.width =
-                    (img.width * scale - 20).toString() + "px";
+                    (image.width * scale - 20).toString() + "px";
                 imageFile.style.height =
-                    (img.height * scale - 20).toString() + "px";
+                    (image.height * scale - 20).toString() + "px";
             } else {
-                imageCanvas.width = img.width;
-                imageCanvas.height = img.height;
-                imageFile.style.width = (img.width - 20).toString() + "px";
-                imageFile.style.height = (img.height - 20).toString() + "px";
+                canvas.width = image.width;
+                canvas.height = image.height;
+                imageFile.style.width = (image.width - 20).toString() + "px";
+                imageFile.style.height = (image.height - 20).toString() + "px";
             }
-            ctx.drawImage(img, 0, 0, imageCanvas.width, imageCanvas.height);
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
             message.innerHTML = "Image file loaded!";
         };
-        img.src = e.target.result;
+        image.src = e.target.result;
     };
     reader.readAsDataURL(file);
 });
@@ -65,12 +54,7 @@ submitButton.addEventListener("click", function () {
     submitButton.innerHTML = `<i class="gg-spinner-alt"></i>`;
 
     const pixelBuffer = new Uint32Array(
-        ctx.getImageData(
-            0,
-            0,
-            imageCanvas.width,
-            imageCanvas.height
-        ).data.buffer
+        ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
     );
 
     if (!pixelBuffer.some((color) => color !== 0)) {
@@ -81,17 +65,15 @@ submitButton.addEventListener("click", function () {
 
     message.innerHTML = "Downloading image data...";
 
-    const data = ctx.getImageData(
-        0,
-        0,
-        imageCanvas.width,
-        imageCanvas.height
-    ).data;
-    let text = "";
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let text = "[";
     for (let i = 0; i < data.length; i += 4) {
-        text += `${data[i]},${data[i + 1]},${data[i + 2]},${data[i + 3]}\n`;
+        text += `[${data[i]},${data[i + 1]},${data[i + 2]},${data[i + 3]}]`;
+        if (i < data.length - 4) {
+            text += ",";
+        }
     }
-    text += "RGBZER";
+    text += "]";
     const blob = new Blob([text], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -107,9 +89,9 @@ submitButton.addEventListener("click", function () {
 
 // If resetButton is clicked, clear the canvas and clear the input file
 resetButton.addEventListener("click", function () {
-    ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
-    imageCanvas.width = 300;
-    imageCanvas.height = 300;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = 300;
+    canvas.height = 300;
     imageFile.style.height = "280px";
     imageFile.style.width = "280px";
     imageFile.value = "";
